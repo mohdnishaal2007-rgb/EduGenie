@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="theme-color" content="#070b18">
+
+  <title>{{ app_name }} — AI Learning Workspace</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body>
+
+  <!-- Ambient background -->
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="ambient ambient-three"></div>
+
+  <main class="container">
+
+    <!-- =========================================
+         TOP NAVIGATION
+    ========================================== -->
+
+    <header class="topbar">
+
+      <div class="brand">
+
+        <div class="brand-mark">
+          <span>✦</span>
+        </div>
+
+        <div>
+          <div class="brand-name">
+            EduGenie
+          </div>
+
+          <div class="brand-caption">
+            AI Learning Workspace
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="top-actions">
+
+        <span id="statusBadge" class="status-badge">
+          Checking AI…
+        </span>
+
+        <button id="themeBtn" class="icon-button" type="button" title="Toggle theme" aria-label="Toggle theme">
+          ☼
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- =========================================
+         HERO
+    ========================================== -->
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="hero-eyebrow">
+          YOUR PERSONAL AI TUTOR
+        </div>
+
+        <h1>
+          Learn anything.
+          <span>Understand everything.</span>
+        </h1>
+
+        <p class="hero-description">
+          Ask questions, understand difficult concepts,
+          practice with quizzes, summarize content,
+          and build your personalized learning path.
+        </p>
+
+      </div>
+
+
+      <div class="hero-orb">
+
+        <div class="orb-ring ring-one"></div>
+        <div class="orb-ring ring-two"></div>
+
+        <div class="orb-core">
+          ✦
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         LEARNING MODES
+    ========================================== -->
+
+    <section class="modes-section">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="section-kicker">
+            LEARNING MODES
+          </span>
+
+          <h2>
+            What do you want to do?
+          </h2>
+        </div>
+
+        <span class="mode-count">
+          5 AI tools
+        </span>
+
+      </div>
+
+
+      <div class="mode-grid">
+
+        <!-- ASK -->
+
+        <button class="mode-card active" type="button" data-mode="qa">
+
+          <div class="mode-icon purple">
+            ?
+          </div>
+
+          <div class="mode-content">
+
+            <strong>
+              Ask
+            </strong>
+
+            <span>
+              Get clear answers
+            </span>
+
+          </div>
+
+          <span class="mode-arrow">
+            →
+          </span>
+
+        </button>
+
+
+        <!-- EXPLAIN -->
+
+        <button class="mode-card" type="button" data-mode="explain">
+
+          <div class="mode-icon blue">
+            ◈
+          </div>
+
+          <div class="mode-content">
+
+            <strong>
+              Explain
+            </strong>
+
+            <span>
+              Understand concepts
+            </span>
+
+          </div>
+
+          <span class="mode-arrow">
+            →
+          </span>
+
+        </button>
+
+
+        <!-- QUIZ -->
+
+        <button class="mode-card" type="button" data-mode="quiz">
+
+          <div class="mode-icon pink">
+            ✓
+          </div>
+
+          <div class="mode-content">
+
+            <strong>
+              Quiz
+            </strong>
+
+            <span>
+              Test your knowledge
+            </span>
+
+          </div>
+
+          <span class="mode-arrow">
+            →
+          </span>
+
+        </button>
+
+
+        <!-- SUMMARIZE -->
+
+        <button class="mode-card" type="button" data-mode="summarize">
+
+          <div class="mode-icon cyan">
+            ≡
+          </div>
+
+          <div class="mode-content">
+
+            <strong>
+              Summarize
+            </strong>
+
+            <span>
+              Simplify long content
+            </span>
+
+          </div>
+
+          <span class="mode-arrow">
+            →
+          </span>
+
+        </button>
+
+
+        <!-- LEARNING PATH -->
+
+        <button class="mode-card" type="button" data-mode="learn">
+
+          <div class="mode-icon green">
+            ↗
+          </div>
+
+          <div class="mode-content">
+
+            <strong>
+              Learning Path
+            </strong>
+
+            <span>
+              Build your roadmap
+            </span>
+
+          </div>
+
+          <span class="mode-arrow">
+            →
+          </span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         MAIN AI WORKSPACE
+    ========================================== -->
+
+    <section class="workspace card">
+
+      <!-- Workspace heading -->
+
+      <div class="workspace-header">
+
+        <div>
+
+          <span class="section-kicker">
+            AI WORKSPACE
+          </span>
+
+          <h2 id="workspaceTitle">
+            Ask EduGenie anything
+          </h2>
+
+          <p id="workspaceDescription">
+            Ask a question and get an AI-powered answer.
+          </p>
+
+        </div>
+
+        <div class="workspace-sparkle">
+          ✦
+        </div>
+
+      </div>
+
+
+      <!-- Hidden original task selector.
+           app.js continues using this internally. -->
+
+      <select id="task" class="task-select-hidden" aria-hidden="true" tabindex="-1">
+
+        <option value="qa">
+          Ask a Question
+        </option>
+
+        <option value="explain">
+          Explain a Topic
+        </option>
+
+        <option value="quiz">
+          Generate Quiz
+        </option>
+
+        <option value="summarize">
+          Summarize
+        </option>
+
+        <option value="learn">
+          Learning Path
+        </option>
+
+      </select>
+
+
+      <!-- Learning level -->
+
+      <div id="levelWrap" class="level-panel hidden">
+
+        <div class="level-label">
+          <span>Learning level</span>
+
+          <span class="level-info">
+            Choose your experience
+          </span>
+        </div>
+
+        <select id="level">
+
+          <option value="beginner">
+            Beginner
+          </option>
+
+          <option value="intermediate">
+            Intermediate
+          </option>
+
+          <option value="advanced">
+            Advanced
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- Input -->
+
+      <div class="input-area">
+
+        <div class="input-header">
+
+          <label for="inputText" id="inputLabel">
+            Your question
+          </label>
+
+          <span id="charCount">
+            0 characters
+          </span>
+
+        </div>
+
+
+        <div class="textarea-wrapper">
+
+          <textarea id="inputText" rows="9" maxlength="5000"
+            placeholder="Ask me anything you want to understand..."></textarea>
+
+          <div class="textarea-glow"></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Smart suggestions -->
+
+      <div class="suggestions-section">
+
+        <span class="suggestions-label">
+          ✦ Try asking
+        </span>
+
+        <div id="suggestions" class="suggestions">
+
+          <button type="button" class="suggestion" data-prompt="Explain this topic in simple words.">
+            Explain simply
+          </button>
+
+          <button type="button" class="suggestion" data-prompt="Explain this with a real-world example.">
+            Give an example
+          </button>
+
+          <button type="button" class="suggestion" data-prompt="Explain this step by step.">
+            Step by step
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- Actions -->
+
+      <div class="workspace-actions">
+
+        <button id="clearBtn" class="secondary-button" type="button">
+          Clear
+        </button>
+
+        <button id="submitBtn" class="generate-button" type="button">
+          <span class="generate-icon">
+            ✨
+          </span>
+
+          <span>
+            Generate Answer
+          </span>
+
+          <span class="generate-arrow">
+            →
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <div class="keyboard-hint">
+
+        <span>
+          Press
+          <kbd>Ctrl</kbd>
+          +
+          <kbd>Enter</kbd>
+          to generate
+        </span>
+
+        <span>
+          Powered by Gemini
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         RESULT
+    ========================================== -->
+
+    <section id="resultCard" class="card result-card hidden">
+
+      <div class="result-header">
+
+        <div class="result-title-area">
+
+          <div class="result-ai-icon">
+            ✦
+          </div>
+
+          <div>
+
+            <span class="section-kicker">
+              AI RESPONSE
+            </span>
+
+            <h2>
+              Your result
+            </h2>
+
+          </div>
+
+        </div>
+
+
+        <div class="result-actions">
+
+          <span id="resultType">
+          </span>
+
+          <button id="copyBtn" class="result-tool" type="button" title="Copy response">
+            Copy
+          </button>
+
+          <button id="regenerateBtn" class="result-tool" type="button" title="Generate again">
+            ↻
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div id="result" class="result-content"></div>
+
+    </section>
+
+
+    <!-- =========================================
+         RECENT LEARNING
+    ========================================== -->
+
+    <section class="recent-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-kicker">
+            LEARNING ACTIVITY
+          </span>
+
+          <h2>
+            Recent learning
+          </h2>
+
+        </div>
+
+        <button id="clearHistoryBtn" class="text-button" type="button">
+          Clear history
+        </button>
+
+      </div>
+
+
+      <div id="recentActivity" class="recent-grid">
+
+        <div class="empty-history">
+
+          <div class="empty-icon">
+            ◌
+          </div>
+
+          <div>
+
+            <strong>
+              Your learning activity will appear here
+            </strong>
+
+            <span>
+              Start exploring EduGenie to build your history.
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer>
+
+      <div class="footer-brand">
+        <span>✦</span>
+        EduGenie
+      </div>
+
+      <span>
+        AI-powered learning assistance
+      </span>
+
+      <span class="footer-dot">
+        •
+      </span>
+
+      <span>
+        FastAPI + Gemini
+      </span>
+
+    </footer>
+
+  </main>
+
+
+  <script src="{{ url_for('static', path='app.js') }}"></script>
+
+</body>
+
+</html>
